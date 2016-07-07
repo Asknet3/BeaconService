@@ -1,0 +1,15 @@
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\bin\Release\BeaconService.dll
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\bin\Release\BeaconService.pdb
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\bin\Release\BeaconService.BeaconService.apk
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\bin\Release\BeaconService.BeaconService-Signed.apk
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\BeaconService.dll
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\BeaconService.pdb
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\android\bin\BeaconService.BeaconService.apk
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\res\layout\main.xml
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\res\values\strings.xml
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\res\drawable\icon.png
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\R.cs.flag
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\uploadflags.txt
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\BeaconService.csprojResolveAssemblyReference.cache
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\BeaconService.dll.mdb
+C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\bin\Release\BeaconService.dll.mdb
