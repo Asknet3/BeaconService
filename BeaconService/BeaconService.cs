@@ -61,20 +61,25 @@ namespace BeaconService
             #endregion =======================
 
 
-            //_iBeaconManager = IBeaconManager.GetInstanceForApplication(this);
+            _iBeaconManager = IBeaconManager.GetInstanceForApplication(this);
 
-            //_iBeaconManager.SetMonitorNotifier(_monitorNotifier);
-            //_iBeaconManager.SetRangeNotifier(_rangeNotifier);
+            _monitorNotifier.EnterRegionComplete += EnteredRegion;
+            _monitorNotifier.ExitRegionComplete += ExitedRegion;
+            _rangeNotifier.DidRangeBeaconsInRegionComplete += this.RangingBeaconsInRegion;
 
-            //_iBeaconManager.Bind(this);
-            //_iBeaconManager.StartMonitoringBeaconsInRegion(_monitoringRegion);
-            //_iBeaconManager.StartRangingBeaconsInRegion(_rangingRegion);
+            _iBeaconManager.SetMonitorNotifier(_monitorNotifier);
+            _iBeaconManager.SetRangeNotifier(_rangeNotifier);
 
+            _monitoringRegion = new Region(monkeyId, UUID, null, null);
+            _rangingRegion = new Region(monkeyId, UUID, null, null);
 
-            //_rangeNotifier.DidRangeBeaconsInRegionComplete += this.RangingBeaconsInRegion;
-
-            //_monitoringRegion = new Region(monkeyId, UUID, null, null);
-            //_rangingRegion = new Region(monkeyId, UUID, null, null);
+            //-----  Si deve fare il Bind  e quindi avviare "StartMonitoringBeaconsInRegion"
+            /*
+            _iBeaconManager.Bind(this);
+            _iBeaconManager.StartMonitoringBeaconsInRegion(_monitoringRegion);
+            _iBeaconManager.StartRangingBeaconsInRegion(_rangingRegion);
+            */
+            //------------------------------------------------------------------------------
 
 
 
@@ -101,12 +106,7 @@ namespace BeaconService
 
             //_iBeaconManager.StartMonitoringBeaconsInRegion(_monitoringRegion);
             //_iBeaconManager.StartRangingBeaconsInRegion(_rangingRegion);
-        }
-
-
-
-
-       
+        }     
 
 
 
