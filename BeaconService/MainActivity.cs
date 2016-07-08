@@ -14,15 +14,9 @@ namespace BeaconService
     {
         private const string UUID = "ACFD065E-C3C0-11E3-9BBE-1A514932AC01";
         private const string monkeyId = "Monkey";
-
-        private static Region _monitoringRegion = new Region(monkeyId, UUID, (Java.Lang.Integer)101, null);
-        private static Region _rangingRegion = new Region(monkeyId, UUID, (Java.Lang.Integer)101, null);
-
-        private static MonitorNotifier _monitorNotifier = new MonitorNotifier();
-        private static RangeNotifier _rangeNotifier = new RangeNotifier();
         public MainActivity()
         {
-           
+            
         }
 
 

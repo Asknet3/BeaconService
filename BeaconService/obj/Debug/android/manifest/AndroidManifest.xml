@@ -10,7 +10,7 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-  <application android:label="BeaconService" android:icon="@drawable/icon" android:name="md564ff4032390898b025eb4cf2d8a0b832.MyAndroidApp" android:allowBackup="true" android:debuggable="true">
+  <application android:label="BeaconService" android:icon="@drawable/icon" android:name="mono.android.app.Application" android:allowBackup="true" android:debuggable="true">
     <service android:name="md564ff4032390898b025eb4cf2d8a0b832.LocationService" />
     <activity android:icon="@drawable/icon" android:label="BeaconService" android:launchMode="singleInstance" android:uiOptions="none" android:name="md564ff4032390898b025eb4cf2d8a0b832.MainActivity">
       <intent-filter>

@@ -10,10 +10,6 @@ BeaconService.MonitorNotifier, BeaconService;md564ff4032390898b025eb4cf2d8a0b832
 BeaconService.MonitorNotifier, BeaconService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md564ff4032390898b025eb4cf2d8a0b832.MonitorNotifier
 BeaconService.MonitorNotifier;md564ff4032390898b025eb4cf2d8a0b832.MonitorNotifier
 beaconservice.MonitorNotifier;md564ff4032390898b025eb4cf2d8a0b832.MonitorNotifier
-BeaconService.MyAndroidApp, BeaconService;md564ff4032390898b025eb4cf2d8a0b832.MyAndroidApp
-BeaconService.MyAndroidApp, BeaconService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md564ff4032390898b025eb4cf2d8a0b832.MyAndroidApp
-BeaconService.MyAndroidApp;md564ff4032390898b025eb4cf2d8a0b832.MyAndroidApp
-beaconservice.MyAndroidApp;md564ff4032390898b025eb4cf2d8a0b832.MyAndroidApp
 BeaconService.ReceiveBoot, BeaconService;md564ff4032390898b025eb4cf2d8a0b832.ReceiveBoot
 BeaconService.ReceiveBoot, BeaconService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md564ff4032390898b025eb4cf2d8a0b832.ReceiveBoot
 BeaconService.ReceiveBoot;md564ff4032390898b025eb4cf2d8a0b832.ReceiveBoot

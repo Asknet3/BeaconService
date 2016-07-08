@@ -23,11 +23,12 @@ namespace BeaconService
         private const string UUID = "ACFD065E-C3C0-11E3-9BBE-1A514932AC01";
         private const string monkeyId = "Monkey";
 
+        private static MonitorNotifier _monitorNotifier = new MonitorNotifier();
+        private static RangeNotifier _rangeNotifier = new RangeNotifier();
+
         private static Region _monitoringRegion = new Region(monkeyId, UUID, (Java.Lang.Integer)101, null);
         private static Region _rangingRegion = new Region(monkeyId, UUID, (Java.Lang.Integer)101, null);
 
-        private static MonitorNotifier _monitorNotifier = new MonitorNotifier();
-        private static RangeNotifier _rangeNotifier = new RangeNotifier();
 
         private IBeaconManager _iBeaconManager;
 
@@ -41,58 +42,82 @@ namespace BeaconService
             base.OnCreate();
 
             Log.Debug("BEACON", "Sono sull'OnCreate");
-            //_iBeaconManager = IBeaconManager.GetInstanceForApplication(Application.Context);
+            _iBeaconManager = IBeaconManager.GetInstanceForApplication(Application.Context);
+
+            _iBeaconManager.Bind(this);
+
+            _monitorNotifier.EnterRegionComplete += EnteredRegion;
+            _monitorNotifier.ExitRegionComplete += ExitedRegion;
+
+            _rangeNotifier.DidRangeBeaconsInRegionComplete += this.RangingBeaconsInRegion;
         }
-
-
-
-
 
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
             Log.Debug("BEACON", "Sono nell'OnStartCommand");
+            //_iBeaconManager = IBeaconManager.GetInstanceForApplication(this);
 
-            #region ===== Invia notifica =====
-            timer1 = new System.Timers.Timer();
-            timer1.Elapsed += new System.Timers.ElapsedEventHandler(NotificaTemporizzata);
-            timer1.Interval = 8000; // in miliseconds
-            timer1.Enabled = true;
-            #endregion =======================
+            //_monitorNotifier.EnterRegionComplete += EnteredRegion;
+            //_monitorNotifier.ExitRegionComplete += ExitedRegion;
 
-
-            _iBeaconManager = IBeaconManager.GetInstanceForApplication(this);
-
-            _monitorNotifier.EnterRegionComplete += EnteredRegion;
-            _monitorNotifier.ExitRegionComplete += ExitedRegion;
-            _rangeNotifier.DidRangeBeaconsInRegionComplete += this.RangingBeaconsInRegion;
-
-            _iBeaconManager.SetMonitorNotifier(_monitorNotifier);
-            _iBeaconManager.SetRangeNotifier(_rangeNotifier);
-
-            _monitoringRegion = new Region(monkeyId, UUID, null, null);
-            _rangingRegion = new Region(monkeyId, UUID, null, null);
-
-            //-----  Si deve fare il Bind  e quindi avviare "StartMonitoringBeaconsInRegion"
-            /*
-            _iBeaconManager.Bind(this);
-            _iBeaconManager.StartMonitoringBeaconsInRegion(_monitoringRegion);
-            _iBeaconManager.StartRangingBeaconsInRegion(_rangingRegion);
-            */
-            //------------------------------------------------------------------------------
-
-
-
-
-            String username = "Pippo";
-            Uri address = new Uri("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage");
-            NameValueCollection nameValueCollection = new NameValueCollection();
-            nameValueCollection["u"] = username;
-            var webClient = new WebClient();
-            webClient.UploadValues(address, "POST", nameValueCollection);
+            //_rangeNotifier.DidRangeBeaconsInRegionComplete += this.RangingBeaconsInRegion;
+            //_iBeaconManager.Bind(this);
 
             return StartCommandResult.NotSticky;
         }
+
+
+
+        //public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
+        //{
+        //    Log.Debug("BEACON", "Sono nell'OnStartCommand");
+
+        //    #region ===== Invia notifica =====
+        //    timer1 = new System.Timers.Timer();
+        //    timer1.Elapsed += new System.Timers.ElapsedEventHandler(NotificaTemporizzata);
+        //    timer1.Interval = 8000; // in miliseconds
+        //    timer1.Enabled = true;
+        //    #endregion =======================
+
+
+        //    _iBeaconManager = IBeaconManager.GetInstanceForApplication(this);
+
+        //    _monitorNotifier.EnterRegionComplete += EnteredRegion;
+        //    _monitorNotifier.ExitRegionComplete += ExitedRegion;
+        //    _rangeNotifier.DidRangeBeaconsInRegionComplete += this.RangingBeaconsInRegion;
+
+        //    _iBeaconManager.SetMonitorNotifier(_monitorNotifier);
+        //    _iBeaconManager.SetRangeNotifier(_rangeNotifier);
+
+        //    _monitoringRegion = new Region(monkeyId, UUID, null, null);
+        //    _rangingRegion = new Region(monkeyId, UUID, null, null);
+
+        //    //-----  Si deve fare il Bind  e quindi avviare "StartMonitoringBeaconsInRegion"
+        //    _iBeaconManager.Bind(this);
+        //    _iBeaconManager.StartMonitoringBeaconsInRegion(_monitoringRegion);
+        //    _iBeaconManager.StartRangingBeaconsInRegion(_rangingRegion);
+        //    //------------------------------------------------------------------------------
+
+
+
+
+        //    String username = "Pippo";
+        //    Uri address = new Uri("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage");
+        //    NameValueCollection nameValueCollection = new NameValueCollection();
+        //    nameValueCollection["u"] = username;
+        //    var webClient = new WebClient();
+        //    try
+        //    {
+        //        webClient.UploadValues(address, "POST", nameValueCollection);
+        //    }
+        //    catch
+        //    {
+        //        // Mostrare messaggio d'errore. Non è stato possibile raggiungere il Client
+        //    }
+
+        //    return StartCommandResult.NotSticky;
+        //}
 
 
 
@@ -101,11 +126,11 @@ namespace BeaconService
         {
             Log.Debug("BEACON", "Sono nell'OnIBeaconServiceConnect");
 
-            //_iBeaconManager.SetMonitorNotifier(_monitorNotifier);
-            //_iBeaconManager.SetRangeNotifier(_rangeNotifier);
+            _iBeaconManager.SetMonitorNotifier(_monitorNotifier);
+            _iBeaconManager.SetRangeNotifier(_rangeNotifier);
 
-            //_iBeaconManager.StartMonitoringBeaconsInRegion(_monitoringRegion);
-            //_iBeaconManager.StartRangingBeaconsInRegion(_rangingRegion);
+            _iBeaconManager.StartMonitoringBeaconsInRegion(_monitoringRegion);
+            _iBeaconManager.StartRangingBeaconsInRegion(_rangingRegion);
         }     
 
 
@@ -184,7 +209,7 @@ namespace BeaconService
             NameValueCollection nameValueCollection = new NameValueCollection();
             nameValueCollection["u"] = username;
             var webClient = new WebClient();
-            webClient.UploadValues(address, "POST", nameValueCollection);
+           // webClient.UploadValues(address, "POST", nameValueCollection);
             // --------------
 
             if (e.Beacons.Count > 0)
