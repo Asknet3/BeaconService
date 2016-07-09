@@ -18,33 +18,50 @@ namespace BeaconService
     [Service]
     public class BeaconService : Service, IBeaconConsumer
     {
-        System.Timers.Timer timer1;
-        private User username;
+        //System.Timers.Timer timer1;
+        //private User username;
         private const string UUID = "ACFD065E-C3C0-11E3-9BBE-1A514932AC01";
         private const string monkeyId = "Monkey";
 
-        private static MonitorNotifier _monitorNotifier = new MonitorNotifier();
-        private static RangeNotifier _rangeNotifier = new RangeNotifier();
+        private static MonitorNotifier _monitorNotifier;
+        private static RangeNotifier _rangeNotifier;
 
-        private static Region _monitoringRegion = new Region(monkeyId, UUID, (Java.Lang.Integer)101, null);
-        private static Region _rangingRegion = new Region(monkeyId, UUID, (Java.Lang.Integer)101, null);
+        private static Region _monitoringRegion; // = new Region(monkeyId, UUID, (Java.Lang.Integer)101, null);
+        private static Region _rangingRegion; //= new Region(monkeyId, UUID, (Java.Lang.Integer)101, null);
 
 
-        private IBeaconManager _iBeaconManager;
+        private IBeaconManager _iBeaconManager = IBeaconManager.GetInstanceForApplication(Application.Context);
 
         int _previousProximity;
 
 
 
+        public BeaconService()
+        {
+            _monitorNotifier = new MonitorNotifier();
+            _rangeNotifier = new RangeNotifier();
+
+            _monitoringRegion = new Region(monkeyId, UUID, null, null);
+
+            //_iBeaconManager.SetForegroundBetweenScanPeriod(3000); // Effettua scan ogni 3000 millisecondi
+
+            _iBeaconManager.SetMonitorNotifier(_monitorNotifier);
+        }
 
         public override void OnCreate()
         {
             base.OnCreate();
 
             Log.Debug("BEACON", "Sono sull'OnCreate");
-            _iBeaconManager = IBeaconManager.GetInstanceForApplication(Application.Context);
 
-            _iBeaconManager.Bind(this);
+            //_monitorNotifier = new MonitorNotifier();
+            //_rangeNotifier = new RangeNotifier();
+
+            //_monitoringRegion = new Region(monkeyId, UUID, (Java.Lang.Integer)101, null);
+            _rangingRegion = new Region(monkeyId, UUID, null, null);
+
+
+            _iBeaconManager.Bind((IBeaconConsumer)this);
 
             _monitorNotifier.EnterRegionComplete += EnteredRegion;
             _monitorNotifier.ExitRegionComplete += ExitedRegion;
@@ -154,48 +171,48 @@ namespace BeaconService
 
 
 
-        private void NotificaTemporizzata(object sender, EventArgs e)
-        {
-            CreaNotifica();
-        }
+        //private void NotificaTemporizzata(object sender, EventArgs e)
+        //{
+        //    CreaNotifica();
+        //}
 
 
 
-        public void CreaNotifica()
-        {
-            // Instantiate the builder and set notification elements:
-            Notification.Builder builder = new Notification.Builder(this)
-                .SetContentTitle("Sample Notification")
-                .SetContentText("Time: " + DateTime.Now)
-                .SetDefaults(NotificationDefaults.Sound)
-                .SetSmallIcon(Resource.Drawable.Icon);
+        //public void CreaNotifica()
+        //{
+        //    // Instantiate the builder and set notification elements:
+        //    Notification.Builder builder = new Notification.Builder(this)
+        //        .SetContentTitle("Sample Notification")
+        //        .SetContentText("Time: " + DateTime.Now)
+        //        .SetDefaults(NotificationDefaults.Sound)
+        //        .SetSmallIcon(Resource.Drawable.Icon);
 
-            builder.SetPriority((int)NotificationPriority.High);
+        //    builder.SetPriority((int)NotificationPriority.High);
 
-            // Build the notification:
-            Notification notification = builder.Build();
+        //    // Build the notification:
+        //    Notification notification = builder.Build();
 
-            // Get the notification manager:
-            NotificationManager notificationManager =
-                GetSystemService(Context.NotificationService) as NotificationManager;
+        //    // Get the notification manager:
+        //    NotificationManager notificationManager =
+        //        GetSystemService(Context.NotificationService) as NotificationManager;
 
-            // Publish the notification:
-            const int notificationId = 0;
-            notificationManager.Notify(notificationId, notification);
-        }
+        //    // Publish the notification:
+        //    const int notificationId = 0;
+        //    notificationManager.Notify(notificationId, notification);
+        //}
 
 
-        public class User
-    {
-        public User()
-        {
+    //    public class User
+    //{
+    //    public User()
+    //    {
 
-        }
+    //    }
 
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
-        public string username { get; set; }
-    }
+    //    [PrimaryKey, AutoIncrement]
+    //    public int ID { get; set; }
+    //    public string username { get; set; }
+    //}
 
 
 
@@ -203,20 +220,21 @@ namespace BeaconService
         {
             Log.Debug("BEACON", "Sono dentro RangingBeaconsInRegion");
 
-            //---------------
-            String username = "IANO";
-            Uri address = new Uri("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage");
-            NameValueCollection nameValueCollection = new NameValueCollection();
-            nameValueCollection["u"] = username;
-            var webClient = new WebClient();
-           // webClient.UploadValues(address, "POST", nameValueCollection);
-            // --------------
+            ////---------------
+            //String username = "IANO";
+            //Uri address = new Uri("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage");
+            //NameValueCollection nameValueCollection = new NameValueCollection();
+            //nameValueCollection["u"] = username;
+            //var webClient = new WebClient();
+            //webClient.UploadValues(address, "POST", nameValueCollection);
+            //// --------------
 
             if (e.Beacons.Count > 0)
             {
                 var beacon = e.Beacons.FirstOrDefault();
                 var message = string.Empty;
                 //username = Utility.GetUser(GetConnection());
+                String username = "Giuseppe";
 
 
                 switch ((ProximityType)beacon.Proximity)
@@ -227,9 +245,11 @@ namespace BeaconService
                         //bool send = DependencyService.Get<ISendMail> ().Send();
 
                         //---------------
-                        //var uri = Android.Net.Uri.Parse("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage?u=Pino");
-                        //var intent = new Intent(Intent.ActionView, uri);
-                        //StartActivity(intent);
+                        Uri address = new Uri("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage");
+                        NameValueCollection nameValueCollection = new NameValueCollection();
+                        nameValueCollection["usrcfgsend"] = username + ". Bene, sei molto vicino a me!";
+                        var webClient = new WebClient();
+                        webClient.UploadValues(address, "POST", nameValueCollection);
                         // --------------
                         //					if(isFirstTime || (DateTime.Now - startTime).TotalSeconds > 10) 
                         //					{
@@ -239,15 +259,24 @@ namespace BeaconService
                         //					break;
                         //					}
                         break;
-                    //case ProximityType.Near:
-                    //    UpdateDisplay("Ho trovato un beacon! \n E' vicino\n\nRssi: " + (ProximityType)beacon.Rssi, Xamarin.Forms.Color.Yellow);
-                    //    break;
-                    //case ProximityType.Far:
-                    //    UpdateDisplay("Ho trovato un beacon! \n E' lontano\n\nRssi: " + (ProximityType)beacon.Rssi, Xamarin.Forms.Color.Blue);
-                    //    break;
-                    //case ProximityType.Unknown:
-                    //    UpdateDisplay("Non sono sicuro che ci sia un Beacon nelle vicinanze.\n\nRssi: " + (ProximityType)beacon.Rssi, Xamarin.Forms.Color.Red);
-                    //    break;
+
+                    case ProximityType.Near:
+                        //UpdateDisplay("Ho trovato un beacon! \n E' vicino\n\nRssi: " + (ProximityType)beacon.Rssi, Xamarin.Forms.Color.Yellow);
+                        //---------------
+                        address = new Uri("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage");
+                        nameValueCollection = new NameValueCollection();
+                        nameValueCollection["usrcfgsend"] = username + ", avvicinati di più, non essere timido!";
+                        webClient = new WebClient();
+                        webClient.UploadValues(address, "POST", nameValueCollection);
+                        // --------------
+                        break;
+
+                    case ProximityType.Far:
+                        //UpdateDisplay("Ho trovato un beacon! \n E' lontano\n\nRssi: " + (ProximityType)beacon.Rssi, Xamarin.Forms.Color.Blue);
+                        break;
+                    case ProximityType.Unknown:
+                        //UpdateDisplay("Non sono sicuro che ci sia un Beacon nelle vicinanze.\n\nRssi: " + (ProximityType)beacon.Rssi, Xamarin.Forms.Color.Red);
+                        break;
                 }
 
                 _previousProximity = beacon.Proximity;
@@ -273,12 +302,12 @@ namespace BeaconService
 
         void EnteredRegion(object sender, MonitorEventArgs e)
         {
-
+            Log.Debug("BEACON", "Sono entrato nell'EnteredRegion");
         }
 
         void ExitedRegion(object sender, MonitorEventArgs e)
         {
-           // RunOnUiThread(() => Toast.MakeText(this, "No beacons visible", ToastLength.Short).Show());
+            //RunOnUiThread(() => Toast.MakeText(this, "No beacons visible", ToastLength.Short).Show());
         }
 
     }

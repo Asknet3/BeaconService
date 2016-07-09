@@ -7,7 +7,8 @@ public class LocationService
 		mono.android.IGCUserPeer,
 		android.location.LocationListener
 {
-	static final String __md_methods;
+/** @hide */
+	public static final String __md_methods;
 	static {
 		__md_methods = 
 			"n_onStartCommand:(Landroid/content/Intent;II)I:GetOnStartCommand_Landroid_content_Intent_IIHandler\n" +
@@ -76,7 +77,7 @@ public class LocationService
 
 	private native void n_onStatusChanged (java.lang.String p0, int p1, android.os.Bundle p2);
 
-	java.util.ArrayList refList;
+	private java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)
 	{
 		if (refList == null)

@@ -12,8 +12,8 @@ namespace BeaconService
     [Activity(Label = "BeaconService", MainLauncher = true, Icon = "@drawable/icon",UiOptions = Android.Content.PM.UiOptions.None, LaunchMode = Android.Content.PM.LaunchMode.SingleInstance)]
     public class MainActivity : Activity
     {
-        private const string UUID = "ACFD065E-C3C0-11E3-9BBE-1A514932AC01";
-        private const string monkeyId = "Monkey";
+        //private const string UUID = "ACFD065E-C3C0-11E3-9BBE-1A514932AC01";
+        //private const string monkeyId = "Monkey";
         public MainActivity()
         {
             
@@ -25,10 +25,9 @@ namespace BeaconService
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
+            // Controllo se il servizio è già presente e avviato
             var manager = (ActivityManager)GetSystemService(ActivityService);
             System.Collections.Generic.IList<ActivityManager.RunningServiceInfo> list = manager.GetRunningServices(int.MaxValue);
-
-            // Controllo se il servizio è già presente e avviato
             bool serviceExist = false;
             for (int i = 0; i < list.Count; i++)
             {
@@ -42,7 +41,7 @@ namespace BeaconService
             Button btn_stop = FindViewById<Button>(Resource.Id.btn_stop);
 
             Intent service = new Intent(this, typeof(BeaconService));
-            Intent locationService = new Intent(this, typeof(LocationService));
+            //Intent locationService = new Intent(this, typeof(LocationService));
 
             if (serviceExist)
             {
@@ -58,7 +57,7 @@ namespace BeaconService
             btn_start.Click += delegate
             {
                 StartService(service);
-                StartService(locationService); // Faccio partire il servizio per la localizzazione
+                //StartService(locationService); // Faccio partire il servizio per la localizzazione
                 btn_start.Enabled = !btn_start.Enabled;
                 btn_stop.Enabled = !btn_stop.Enabled;
             };

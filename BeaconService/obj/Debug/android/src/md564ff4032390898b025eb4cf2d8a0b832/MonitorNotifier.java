@@ -7,7 +7,8 @@ public class MonitorNotifier
 		mono.android.IGCUserPeer,
 		com.radiusnetworks.ibeacon.MonitorNotifier
 {
-	static final String __md_methods;
+/** @hide */
+	public static final String __md_methods;
 	static {
 		__md_methods = 
 			"n_didDetermineStateForRegion:(ILcom/radiusnetworks/ibeacon/Region;)V:GetDidDetermineStateForRegion_ILcom_radiusnetworks_ibeacon_Region_Handler:RadiusNetworks.IBeaconAndroid.IMonitorNotifierInvoker, Android-iBeacon-Service\n" +
@@ -49,7 +50,7 @@ public class MonitorNotifier
 
 	private native void n_didExitRegion (com.radiusnetworks.ibeacon.Region p0);
 
-	java.util.ArrayList refList;
+	private java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)
 	{
 		if (refList == null)

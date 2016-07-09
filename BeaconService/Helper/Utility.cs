@@ -20,19 +20,19 @@ namespace CoffeeBreak
 
 
 
-		public static User GetUser (SQLiteConnection connection)
-		{
-			var query = connection.Table<User> ().FirstOrDefault ();
+		//public static User GetUser (SQLiteConnection connection)
+		//{
+		//	var query = connection.Table<User> ().FirstOrDefault ();
 
-			return query;
-		}
+		//	return query;
+		//}
 
 
-		public static int SaveUser (SQLiteConnection connection, string usrName)
-		{
-			var usr = new User{ username = usrName};
-			return connection.Insert (usr);
-		}
+		//public static int SaveUser (SQLiteConnection connection, string usrName)
+		//{
+		//	var usr = new User{ username = usrName};
+		//	return connection.Insert (usr);
+		//}
 
 
 

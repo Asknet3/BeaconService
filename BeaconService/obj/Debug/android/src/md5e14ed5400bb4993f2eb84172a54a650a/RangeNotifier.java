@@ -7,7 +7,8 @@ public class RangeNotifier
 		mono.android.IGCUserPeer,
 		com.radiusnetworks.ibeacon.RangeNotifier
 {
-	static final String __md_methods;
+/** @hide */
+	public static final String __md_methods;
 	static {
 		__md_methods = 
 			"n_didRangeBeaconsInRegion:(Ljava/util/Collection;Lcom/radiusnetworks/ibeacon/Region;)V:GetDidRangeBeaconsInRegion_Ljava_util_Collection_Lcom_radiusnetworks_ibeacon_Region_Handler:RadiusNetworks.IBeaconAndroid.IRangeNotifierInvoker, Android-iBeacon-Service\n" +
@@ -31,7 +32,7 @@ public class RangeNotifier
 
 	private native void n_didRangeBeaconsInRegion (java.util.Collection p0, com.radiusnetworks.ibeacon.Region p1);
 
-	java.util.ArrayList refList;
+	private java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)
 	{
 		if (refList == null)
