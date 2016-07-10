@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Content.PM;
 using RadiusNetworks.IBeaconAndroid;
 using CoffeeBreak.Droid;
+using Android.Bluetooth;
 
 namespace BeaconService
 {
@@ -23,6 +24,24 @@ namespace BeaconService
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            Intent service = new Intent(this, typeof(BeaconService));
+            //Intent locationService = new Intent(this, typeof(LocationService));
+
+            //// Controlla che il bluetooth sia attivo
+            //BluetoothAdapter bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
+            //bool statoInizialeBT;
+
+            //statoInizialeBT = bluetoothAdapter.IsEnabled;
+            //if (!statoInizialeBT)
+            //{
+            //    //Se quando parte il servizio il BT è spento, ACCENDILO
+            //    CreaNotifica("Attenzione", "Attiva prima il BT sul tuo dispositivo");
+            //    StopService(service);
+            //    System.Environment.Exit(0);
+            //}
+
+
             SetContentView(Resource.Layout.Main);
 
             // Controllo se il servizio è già presente e avviato
@@ -40,8 +59,8 @@ namespace BeaconService
             Button btn_start = FindViewById<Button>(Resource.Id.btn_start);
             Button btn_stop = FindViewById<Button>(Resource.Id.btn_stop);
 
-            Intent service = new Intent(this, typeof(BeaconService));
-            //Intent locationService = new Intent(this, typeof(LocationService));
+            
+
 
             if (serviceExist)
             {
@@ -69,6 +88,31 @@ namespace BeaconService
                 btn_start.Enabled = !btn_start.Enabled;
                 btn_stop.Enabled = !btn_stop.Enabled;
             };
+        }
+
+
+
+        public void CreaNotifica(string title, string msg)
+        {
+            // Instantiate the builder and set notification elements:
+            Notification.Builder builder = new Notification.Builder(this)
+                .SetContentTitle(title)
+                .SetContentText(msg)
+                .SetDefaults(NotificationDefaults.Sound)
+                .SetSmallIcon(Resource.Drawable.Icon);
+
+            builder.SetPriority((int)NotificationPriority.High);
+
+            // Build the notification:
+            Notification notification = builder.Build();
+
+            // Get the notification manager:
+            NotificationManager notificationManager =
+                GetSystemService(Context.NotificationService) as NotificationManager;
+
+            // Publish the notification:
+            const int notificationId = 0;
+            notificationManager.Notify(notificationId, notification);
         }
     }
 }

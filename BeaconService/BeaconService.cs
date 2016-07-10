@@ -12,6 +12,7 @@ using Android.Widget;
 using System.Net;
 using System.Collections.Specialized;
 using Android.Util;
+using Android.Bluetooth;
 
 namespace BeaconService
 {
@@ -20,6 +21,9 @@ namespace BeaconService
     {
         //System.Timers.Timer timer1;
         //private User username;
+
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
+        bool statoInizialeBT;
         private const string UUID = "ACFD065E-C3C0-11E3-9BBE-1A514932AC01";
         private const string monkeyId = "Monkey";
 
@@ -57,7 +61,6 @@ namespace BeaconService
             //_monitorNotifier = new MonitorNotifier();
             //_rangeNotifier = new RangeNotifier();
 
-            //_monitoringRegion = new Region(monkeyId, UUID, (Java.Lang.Integer)101, null);
             _rangingRegion = new Region(monkeyId, UUID, null, null);
 
 
@@ -73,13 +76,18 @@ namespace BeaconService
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
             Log.Debug("BEACON", "Sono nell'OnStartCommand");
-            //_iBeaconManager = IBeaconManager.GetInstanceForApplication(this);
 
-            //_monitorNotifier.EnterRegionComplete += EnteredRegion;
-            //_monitorNotifier.ExitRegionComplete += ExitedRegion;
 
-            //_rangeNotifier.DidRangeBeaconsInRegionComplete += this.RangingBeaconsInRegion;
-            //_iBeaconManager.Bind(this);
+            // Controlla che il bluetooth sia attivo
+            statoInizialeBT = bluetoothAdapter.IsEnabled;
+            if (!statoInizialeBT)
+            {
+                //Se quando parte il servizio il BT è spento, ACCENDILO
+                CreaNotifica("Attenzione", "Attiva prima il BT sul tuo dispositivo");
+                SendMessage("attiva prima il Bluetooth sul tuo telefono");
+                StopService(intent);
+                System.Environment.Exit(0);
+            }
 
             return StartCommandResult.NotSticky;
         }
@@ -240,17 +248,11 @@ namespace BeaconService
                 switch ((ProximityType)beacon.Proximity)
                 {
                     case ProximityType.Immediate:
-
                         //UpdateDisplay("Ciao " + username.username + ", ho trovato un beacon! \n E' MOLTO vicino\n\nRssi: " + (ProximityType)beacon.Rssi, Xamarin.Forms.Color.Green);
                         //bool send = DependencyService.Get<ISendMail> ().Send();
+                        SendMessage("bene, sei molto vicino a me!");
 
-                        //---------------
-                        Uri address = new Uri("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage");
-                        NameValueCollection nameValueCollection = new NameValueCollection();
-                        nameValueCollection["usrcfgsend"] = username + ". Bene, sei molto vicino a me!";
-                        var webClient = new WebClient();
-                        webClient.UploadValues(address, "POST", nameValueCollection);
-                        // --------------
+                        
                         //					if(isFirstTime || (DateTime.Now - startTime).TotalSeconds > 10) 
                         //					{
                         //						isFirstTime = false;
@@ -262,13 +264,7 @@ namespace BeaconService
 
                     case ProximityType.Near:
                         //UpdateDisplay("Ho trovato un beacon! \n E' vicino\n\nRssi: " + (ProximityType)beacon.Rssi, Xamarin.Forms.Color.Yellow);
-                        //---------------
-                        address = new Uri("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage");
-                        nameValueCollection = new NameValueCollection();
-                        nameValueCollection["usrcfgsend"] = username + ", avvicinati di più, non essere timido!";
-                        webClient = new WebClient();
-                        webClient.UploadValues(address, "POST", nameValueCollection);
-                        // --------------
+                        SendMessage("avvicinati di più, non essere timido!");
                         break;
 
                     case ProximityType.Far:
@@ -308,8 +304,46 @@ namespace BeaconService
         void ExitedRegion(object sender, MonitorEventArgs e)
         {
             //RunOnUiThread(() => Toast.MakeText(this, "No beacons visible", ToastLength.Short).Show());
+            SendMessage("sei fuori dalla mia portata");
         }
 
+
+        public void SendMessage(string msg)
+        {
+            String username = "Giuseppe";
+            //---------------
+            Uri address = new Uri("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage");
+            NameValueCollection nameValueCollection = new NameValueCollection();
+            nameValueCollection["usrcfgsend"] = username + ", " + msg;
+            var webClient = new WebClient();
+            webClient.UploadValues(address, "POST", nameValueCollection);
+            // --------------
+        }
+
+
+
+        public void CreaNotifica(string title, string msg)
+        {
+            // Instantiate the builder and set notification elements:
+            Notification.Builder builder = new Notification.Builder(this)
+                .SetContentTitle(title)
+                .SetContentText(msg)
+                .SetDefaults(NotificationDefaults.Sound)
+                .SetSmallIcon(Resource.Drawable.Icon);
+
+            builder.SetPriority((int)NotificationPriority.High);
+
+            // Build the notification:
+            Notification notification = builder.Build();
+
+            // Get the notification manager:
+            NotificationManager notificationManager =
+                GetSystemService(Context.NotificationService) as NotificationManager;
+
+            // Publish the notification:
+            const int notificationId = 0;
+            notificationManager.Notify(notificationId, notification);
+        }
     }
 
 
