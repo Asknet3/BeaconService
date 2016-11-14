@@ -21,6 +21,7 @@ namespace BeaconService
     {
         //System.Timers.Timer timer1;
         //private User username;
+        string domain = "http://asknet.ddns.net/";
 
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
         bool statoInizialeBT;
@@ -312,7 +313,7 @@ namespace BeaconService
         {
             String username = "Giuseppe";
             //---------------
-            Uri address = new Uri("http://asknet.ddns.net/CoffeeBreakService.asmx/UpdateMessage");
+            Uri address = new Uri(domain + "CoffeeBreakService.asmx/UpdateMessage");
             NameValueCollection nameValueCollection = new NameValueCollection();
             nameValueCollection["usrcfgsend"] = username + ", " + msg;
             var webClient = new WebClient();

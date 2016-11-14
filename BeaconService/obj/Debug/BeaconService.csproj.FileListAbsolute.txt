@@ -41,7 +41,6 @@ C:\Users\asknet\Desktop\Development\BeaconService\BeaconService\obj\Debug\res\dr
 C:\Users\asknet\Desktop\Development\BeaconService\BeaconService\obj\Debug\R.cs.flag
 C:\Users\asknet\Desktop\Development\BeaconService\BeaconService\obj\Debug\uploadflags.txt
 C:\Users\asknet\Desktop\Development\BeaconService\BeaconService\bin\Debug\BeaconService.dll.mdb
-C:\Users\asknet\Desktop\Development\BeaconService\BeaconService\obj\Debug\BeaconService.csprojResolveAssemblyReference.cache
 C:\Users\asknet\Desktop\Development\BeaconService\BeaconService\bin\Debug\Java.Interop.dll.mdb
 C:\Users\asknet\Desktop\Development\BeaconService\BeaconService\bin\Debug\Mono.Android.dll.mdb
 C:\Users\asknet\Desktop\Development\BeaconService\BeaconService\bin\Debug\mscorlib.dll.mdb

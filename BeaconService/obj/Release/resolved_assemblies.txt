@@ -1,8 +1,0 @@
-C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\android\assets\BeaconService.dll
-C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\android\assets\Mono.Android.dll
-C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\android\assets\mscorlib.dll
-C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\android\assets\System.Core.dll
-C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\android\assets\System.dll
-C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\android\assets\System.Xml.dll
-C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\android\assets\System.Runtime.Serialization.dll
-C:\Users\Giuseppe\Documents\Visual Studio 2015\Projects\BeaconService\BeaconService\obj\Release\android\assets\System.ServiceModel.Internals.dll
