@@ -21,7 +21,8 @@ namespace BeaconService
     {
         //System.Timers.Timer timer1;
         //private User username;
-        string domain = "http://asknet.ddns.net/";
+        string domain = "http://asknet.redirectme.net/";
+        //string domain = "http://93.146.104.101/";
 
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
         bool statoInizialeBT;
@@ -48,7 +49,7 @@ namespace BeaconService
 
             _monitoringRegion = new Region(monkeyId, UUID, null, null);
 
-            //_iBeaconManager.SetForegroundBetweenScanPeriod(3000); // Effettua scan ogni 3000 millisecondi
+            _iBeaconManager.SetForegroundBetweenScanPeriod(3000); // Effettua scan ogni 3000 millisecondi
 
             _iBeaconManager.SetMonitorNotifier(_monitorNotifier);
         }
@@ -311,14 +312,21 @@ namespace BeaconService
 
         public void SendMessage(string msg)
         {
-            String username = "Giuseppe";
-            //---------------
-            Uri address = new Uri(domain + "CoffeeBreakService.asmx/UpdateMessage");
-            NameValueCollection nameValueCollection = new NameValueCollection();
-            nameValueCollection["usrcfgsend"] = username + ", " + msg;
-            var webClient = new WebClient();
-            webClient.UploadValues(address, "POST", nameValueCollection);
-            // --------------
+            try
+            {
+                String username = "Giuseppe";
+                //---------------
+                Uri address = new Uri(domain + "CoffeeBreakService.asmx/UpdateMessage");
+                NameValueCollection nameValueCollection = new NameValueCollection();
+                nameValueCollection["usrcfgsend"] = username + ", " + msg;
+                var webClient = new WebClient();
+                webClient.UploadValues(address, "POST", nameValueCollection);
+                // --------------
+            }
+            catch
+            {
+
+            }
         }
 
 

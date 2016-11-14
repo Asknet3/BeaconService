@@ -100,27 +100,25 @@ class MonoPackageManager_Resources {
 		/* We need to ensure that "BeaconService.dll" comes first in this list. */
 		"BeaconService.dll",
 		"Android-iBeacon-Service.dll",
-		"Java.Interop.dll",
 		"SQLite-net.dll",
 		"SQLitePCL.batteries.dll",
 		"SQLitePCL.raw.dll",
 		"SQLitePCLPlugin_esqlite3.dll",
-		"System.Threading.dll",
 		"System.Runtime.dll",
 		"System.Collections.dll",
-		"System.Collections.Concurrent.dll",
-		"System.Diagnostics.Debug.dll",
-		"System.Reflection.dll",
-		"System.Linq.dll",
-		"System.Runtime.InteropServices.dll",
 		"System.Runtime.Extensions.dll",
-		"System.Reflection.Extensions.dll",
-		"System.ServiceModel.Internals.dll",
+		"System.Reflection.dll",
 		"System.Linq.Expressions.dll",
+		"System.Diagnostics.Debug.dll",
+		"System.Linq.dll",
+		"System.Threading.dll",
+		"System.Reflection.Extensions.dll",
 		"System.Threading.Tasks.dll",
 		"System.Resources.ResourceManager.dll",
+		"System.Collections.Concurrent.dll",
+		"System.Runtime.InteropServices.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};
-	public static final String ApiPackageName = "Mono.Android.Platform.ApiLevel_23";
+	public static final String ApiPackageName = "Mono.Android.Platform.ApiLevel_24";
 }
