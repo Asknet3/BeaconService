@@ -1,3 +1,7 @@
+CoffeeBreak.Droid.RangeNotifier, BeaconService;md5e14ed5400bb4993f2eb84172a54a650a.RangeNotifier
+CoffeeBreak.Droid.RangeNotifier, BeaconService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5e14ed5400bb4993f2eb84172a54a650a.RangeNotifier
+CoffeeBreak.Droid.RangeNotifier;md5e14ed5400bb4993f2eb84172a54a650a.RangeNotifier
+coffeebreak.droid.RangeNotifier;md5e14ed5400bb4993f2eb84172a54a650a.RangeNotifier
 BeaconService.LocationService, BeaconService;md564ff4032390898b025eb4cf2d8a0b832.LocationService
 BeaconService.LocationService, BeaconService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md564ff4032390898b025eb4cf2d8a0b832.LocationService
 BeaconService.LocationService;md564ff4032390898b025eb4cf2d8a0b832.LocationService
@@ -18,7 +22,3 @@ BeaconService.BeaconService, BeaconService;md564ff4032390898b025eb4cf2d8a0b832.B
 BeaconService.BeaconService, BeaconService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md564ff4032390898b025eb4cf2d8a0b832.BeaconService
 BeaconService.BeaconService;md564ff4032390898b025eb4cf2d8a0b832.BeaconService
 beaconservice.BeaconService;md564ff4032390898b025eb4cf2d8a0b832.BeaconService
-CoffeeBreak.Droid.RangeNotifier, BeaconService;md5e14ed5400bb4993f2eb84172a54a650a.RangeNotifier
-CoffeeBreak.Droid.RangeNotifier, BeaconService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5e14ed5400bb4993f2eb84172a54a650a.RangeNotifier
-CoffeeBreak.Droid.RangeNotifier;md5e14ed5400bb4993f2eb84172a54a650a.RangeNotifier
-coffeebreak.droid.RangeNotifier;md5e14ed5400bb4993f2eb84172a54a650a.RangeNotifier

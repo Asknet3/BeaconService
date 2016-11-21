@@ -10,11 +10,9 @@ using Android.Bluetooth;
 
 namespace BeaconService
 {
-    [Activity(Label = "BeaconService", MainLauncher = true, Icon = "@drawable/icon",UiOptions = Android.Content.PM.UiOptions.None, LaunchMode = Android.Content.PM.LaunchMode.SingleInstance)]
+    [Activity(Label = "BeaconService", MainLauncher = true, Icon = "@drawable/Icon",UiOptions = Android.Content.PM.UiOptions.None, LaunchMode = Android.Content.PM.LaunchMode.SingleInstance)]
     public class MainActivity : Activity
     {
-        //private const string UUID = "ACFD065E-C3C0-11E3-9BBE-1A514932AC01";
-        //private const string monkeyId = "Monkey";
         public MainActivity()
         {
             
@@ -26,21 +24,6 @@ namespace BeaconService
             base.OnCreate(bundle);
 
             Intent service = new Intent(this, typeof(BeaconService));
-            //Intent locationService = new Intent(this, typeof(LocationService));
-
-            //// Controlla che il bluetooth sia attivo
-            //BluetoothAdapter bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
-            //bool statoInizialeBT;
-
-            //statoInizialeBT = bluetoothAdapter.IsEnabled;
-            //if (!statoInizialeBT)
-            //{
-            //    //Se quando parte il servizio il BT è spento, ACCENDILO
-            //    CreaNotifica("Attenzione", "Attiva prima il BT sul tuo dispositivo");
-            //    StopService(service);
-            //    System.Environment.Exit(0);
-            //}
-
 
             SetContentView(Resource.Layout.Main);
 
@@ -53,6 +36,7 @@ namespace BeaconService
                 if (list[i].Service.PackageName == "BeaconService.BeaconService")
                 {
                     serviceExist = true;
+                    break;
                 }
             }
 
@@ -76,7 +60,6 @@ namespace BeaconService
             btn_start.Click += delegate
             {
                 StartService(service);
-                //StartService(locationService); // Faccio partire il servizio per la localizzazione
                 btn_start.Enabled = !btn_start.Enabled;
                 btn_stop.Enabled = !btn_stop.Enabled;
             };
@@ -84,7 +67,6 @@ namespace BeaconService
             btn_stop.Click += delegate
             {
                 StopService(service);
-                //StopService(locationService); // Fermo il servizio per la localizzazione
                 btn_start.Enabled = !btn_start.Enabled;
                 btn_stop.Enabled = !btn_stop.Enabled;
             };
@@ -99,7 +81,7 @@ namespace BeaconService
                 .SetContentTitle(title)
                 .SetContentText(msg)
                 .SetDefaults(NotificationDefaults.Sound)
-                .SetSmallIcon(Resource.Drawable.Icon);
+                .SetSmallIcon(Resource.Drawable.Icon );
 
             builder.SetPriority((int)NotificationPriority.High);
 

@@ -22,7 +22,7 @@ namespace BeaconService
         //System.Timers.Timer timer1;
         //private User username;
         string domain = "http://asknet.redirectme.net/";
-        //string domain = "http://93.146.104.101/";
+
 
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
         bool statoInizialeBT;
@@ -86,7 +86,7 @@ namespace BeaconService
             {
                 //Se quando parte il servizio il BT è spento, ACCENDILO
                 CreaNotifica("Attenzione", "Attiva prima il BT sul tuo dispositivo");
-                SendMessage("attiva prima il Bluetooth sul tuo telefono");
+                SendMessage("Attiva prima il Bluetooth sul tuo telefono");
                 StopService(intent);
                 System.Environment.Exit(0);
             }
@@ -244,29 +244,19 @@ namespace BeaconService
                 var beacon = e.Beacons.FirstOrDefault();
                 var message = string.Empty;
                 //username = Utility.GetUser(GetConnection());
-                String username = "Giuseppe";
+                
 
 
                 switch ((ProximityType)beacon.Proximity)
                 {
                     case ProximityType.Immediate:
-                        //UpdateDisplay("Ciao " + username.username + ", ho trovato un beacon! \n E' MOLTO vicino\n\nRssi: " + (ProximityType)beacon.Rssi, Xamarin.Forms.Color.Green);
-                        //bool send = DependencyService.Get<ISendMail> ().Send();
                         SendMessage("bene, sei molto vicino a me!");
-
-                        
-                        //					if(isFirstTime || (DateTime.Now - startTime).TotalSeconds > 10) 
-                        //					{
-                        //						isFirstTime = false;
-                        //						ShowNotification();
-                        //						startTime = DateTime.Now;
-                        //					break;
-                        //					}
+                        Utility.Avvia_Spotify(domain); // Avvia Spotify
                         break;
 
                     case ProximityType.Near:
-                        //UpdateDisplay("Ho trovato un beacon! \n E' vicino\n\nRssi: " + (ProximityType)beacon.Rssi, Xamarin.Forms.Color.Yellow);
                         SendMessage("avvicinati di più, non essere timido!");
+                        Utility.Avvia_Spotify(domain); // Avvia Spotify
                         break;
 
                     case ProximityType.Far:
@@ -288,7 +278,6 @@ namespace BeaconService
             string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var path = Path.Combine(documentsPath, sqliteFilename);
 
-
             // creo la connection
             var conn = new SQLiteConnection(path);
 
@@ -306,7 +295,7 @@ namespace BeaconService
         void ExitedRegion(object sender, MonitorEventArgs e)
         {
             //RunOnUiThread(() => Toast.MakeText(this, "No beacons visible", ToastLength.Short).Show());
-            SendMessage("sei fuori dalla mia portata");
+            SendMessage("Sei fuori dalla mia portata");
         }
 
 

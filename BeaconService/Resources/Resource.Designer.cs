@@ -45,7 +45,10 @@ namespace BeaconService
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			public const int ibeaconlogo = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int Icon = 2130837505;
 			
 			static Drawable()
 			{
@@ -65,15 +68,6 @@ namespace BeaconService
 			
 			// aapt resource value: 0x7f040001
 			public const int btn_stop = 2130968577;
-			
-			// aapt resource value: 0x7f040003
-			public const int lbl_lat = 2130968579;
-			
-			// aapt resource value: 0x7f040004
-			public const int lbl_lon = 2130968580;
-			
-			// aapt resource value: 0x7f040002
-			public const int textView1 = 2130968578;
 			
 			static Id()
 			{
